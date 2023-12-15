@@ -1,0 +1,93 @@
+/* Custom global styles that can override bootstrap styles */
+
+
+body {
+    background-color: #98A9BF;
+}
+
+.App {
+   
+}
+
+.gray-box {
+    background-color: #912342;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 10%;
+}
+
+.sidebar {
+    background-color: #181D19;
+    color: #FEFEFE;
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100vh - 30px);
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.sidebar .nav-link {
+    color: #FEFEFE;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link:focus {
+    background-color: #2A2F30;
+    text-decoration: none;
+}
+
+.nav {
+
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.calc-component {
+    background-color: orange;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.calc-card {
+    width: 100%; /* adjust card content width to fill the column */
+    display: flex;
+    flex-direction: column; /* stack the card content vertically */
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+  
+.calc-card:hover {
+    transform: scale(1.05);
+}
+
+.calc-card card-title {
+    font-size: 1.2rem;
+}
+
+.calc-card card-text {
+    
+}
+
+.calc-card img {
+    height: 200px; /* fixed height for imaged*/
+    object-fit: cover; /* cover the entire area without stretching */
+ }
+
+.card-collection-container {
+    /* margin-top: 30px;  */
+}
+
+.infoCard .card-header {
+    background-color: #004494;
+    color: white;
+}
