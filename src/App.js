@@ -11,6 +11,9 @@ import { Link } from 'react-router-dom'
 import MyNavbar from './components/MyNavbar'
 import ROIPage from './pages/ROIPage'
 import NetWorthPage from './pages/NetWorthPage'
+import InvestmentPage from './pages/InvestmentPage'
+import HomeBuyingPage from './pages/HomeBuyingPage'
+import TakeHomePayPage from './pages/TakeHomePayPage'
 
 
 function Sidebar() {
@@ -28,16 +31,19 @@ function Sidebar() {
           <Link to="/investment-calculator" className="nav-link">Investment Calculator</Link>
         </NavItem>
         <NavItem>
+          <Link to="/home-buying-calculator" className="nav-link">Home Buying Calculator</Link>
+        </NavItem>
+        <NavItem>
+          <Link to="/take-home-pay-calculator" className="nav-link">Take Home Pay Calculator</Link>
+        </NavItem>
+        <NavItem>
           <Link to="/roi-calculator" className="nav-link">Return on Investment Calculator</Link>
         </NavItem>
         <NavItem>
           <Link to="/car-cost-calculator" className="nav-link">Compare Car Lease vs Finance Calculator</Link>
         </NavItem>
         <NavItem>
-          <Link to="/affordability-calculator" className="nav-link">How long to afford this?</Link>
-        </NavItem>
-        <NavItem>
-          <Link to="/car-cost-calculator" className="nav-link">Salary after Taxes Calculator</Link>
+          <Link to="/affordability-calculator" className="nav-link">Affordability Calculator</Link>
         </NavItem>
         {/* repeat for other links */}
       </Nav>
@@ -49,18 +55,19 @@ function Sidebar() {
 function CalcCard({ title, text, imageUrl, route }) {
   return (
     <Card className='calc-card text-center'>
-      <Card.Img variant="top" src={imageUrl} />
+      <Link to={route} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Card.Img variant="top" src={imageUrl} />
 
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>
-          {text}
-        </Card.Text>
-        <LinkContainer to={route}>
-          <Button variant="primary">Try it</Button>
-        </LinkContainer>
-
-      </Card.Body>
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>
+            {text}
+          </Card.Text>
+          <LinkContainer to={route}>
+            <Button variant="primary">Try it</Button>
+          </LinkContainer>
+        </Card.Body>
+      </Link>
     </Card>
   );
 }
@@ -70,79 +77,80 @@ function CardCollection() {
     {
       id: 1,
       title: "Net Worth Calculator",
-      text: "Discover your financial standing! Calculate your net worth by evaluating all your assets against liabilities. Understand where you stand financially and plan your future accordingly.",
+      text: "Discover your financial standing by calculating your net worth. Evaluate all your assets against liabilities to understand where you stand financially.",
       imageUrl: "https://www.investopedia.com/thmb/DpJUmwpHd79ubs8mL3jdGEMehBM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/net-worth-4192297-1-6e76a5b895f04fa5b6c10b75ed3d576f.jpg",
       route: "/net-worth-calculator"
     },
     {
       id: 2,
       title: "Investment Calculator",
-      text: "Explore the potential of your investments! Compare the growth of your money in different scenarios like stocks, high-yield savings, or cryptocurrency over various timeframes.",
+      text: "Explore your investment potential. See how your money could grow in different scenarios like stocks, high-yield savings, or cryptocurrency over time.",
       imageUrl: "https://ssir.org/images/blog/Lamy-Leijonhufvud-ODonohoe-next-decade-impact-invest-592x444.jpg",
-      route: "/roi-calculator"
+      route: "/investment-calculator"
     },
     {
       id: 3,
-      title: "Return on Investment Analysis Tool",
-      text: "calculate your return on investment by inputting the initial amount, total returns, and the investment duration. This powerful tool helps you to evaluate the effectiveness of your investments.",
-      imageUrl: "https://www.salesbook.com/wp-content/uploads/2023/04/what_is_ROI-1024x706.png",
-      route: "/roi-calculator"
+      title: "Home Buying Planner",
+      text: "Determine how long it will take to buy your dream home based on your income. Calculate your potential future mortgage payments.",
+      imageUrl: "https://www.bankrate.com/2023/05/11164344/Real-Estate-When-should-I-buy-a-house-Personal-vs-Market.jpg?auto=webp&optimize=high&crop=16:9&width=912",
+      route: "/home-buying-calculator"
     },
     {
-      id: 4,
-      title: "Should I lease or Finance a Car",
-      text: "Making a decision on car financing? This tool helps you compare leasing vs. financing options based on your down payment, monthly payments, and the term of the loan.",
-      imageUrl: "https://media.ed.edmunds-media.com/lexus/rx/2024/oem/2024_lexus_rx_4dr-suv_350-f-sport_fq_oem_1_1600.jpg",
+      id: 9,
+      title: "Student Loan Repayment Calculator",
+      text: "Manage your student loan repayment effectively. Input your loan details to see your monthly payment and total interest.",
+      imageUrl: "https://cdn.vox-cdn.com/thumbor/BdZesQyvmI96OWiRPSK0jK5ipu0=/0x0:7095x5000/1200x800/filters:focal(2889x1608:4023x2742)/cdn.vox-cdn.com/uploads/chorus_image/image/72727061/GettyImages_1482844574.0.jpg",
       route: "/no-page"
     },
+    
     {
       id: 5,
       title: "Calculate my salary after taxes",
-      text: "Find out your actual take-home pay! Enter your salary details to see how state taxes and different tax brackets affect your paycheck, giving you a clear picture of your net income.",
+      text: "Discover your actual take-home pay. Enter your salary details to see the impact of state taxes and tax brackets on your paycheck.",
       imageUrl: "https://media.istockphoto.com/id/1481366238/vector/taxation-concept-calculation-of-the-tax-return-paperwork-tax-payment-date-flat-vector.jpg?s=612x612&w=0&k=20&c=U27cKNe_xrTOuNZLBBeHCZuK0d9IpU3VZEsAve8-Ajw=",
       route: "/no-page"
     },
     {
       id: 6,
-      title: "How long until I can afford this",
-      text: "Set your savings goal and find out when you can achieve it! Calculate the time required to afford a major purchase based on your income, savings rate, and the amount you can set aside.",
-      imageUrl: "https://www.bankrate.com/2023/05/11164344/Real-Estate-When-should-I-buy-a-house-Personal-vs-Market.jpg?auto=webp&optimize=high&crop=16:9&width=912",
+      title: "How long until I can afford to buy this outright",
+      text: "Set a savings goal and calculate when you can achieve it. Find out the time needed to afford it based on income and savings rate.",
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_Q7X0KufUWLjs_9oZdY76S2WcX3O9hTvhg&usqp=CAU",
+      route: "/no-page"
+    },
+    {
+      id: 4,
+      title: "Lease vs Finance Car",
+      text: "Deciding between car leasing and financing? Use this tool to compare options based on your down payment, monthly payments, and loan term.",
+      imageUrl: "https://media.ed.edmunds-media.com/lexus/rx/2024/oem/2024_lexus_rx_4dr-suv_350-f-sport_fq_oem_1_1600.jpg",
       route: "/no-page"
     },
     {
       id: 7,
-      title: "Buy this vs Invest",
-      text: "The difference between buying something and investing the same amount. Buy that nice car or invest the money?",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/2024-lexus-nx350-exterior-109-641b4ca787aca.jpg?crop=0.757xw:0.671xh;0.0537xw,0.249xh&resize=1200:*",
+      title: "Can I afford this house?",
+      text: "Estimate the mortgage amount you can afford based on your income, debts, and down payment. Make informed decisions about your home purchase.",
+      imageUrl: "https://truenorthmortgage.imgix.net/images/Affordability.png?auto=format&crop=focalpoint&domain=truenorthmortgage.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=630&ixlib=php-3.3.1&q=82&usm=20&w=1200",
       route: "/no-page"
     },
     {
       id: 8,
-      title: "Mortgage Affordability Calculator",
-      text: "Planning to buy a house? This calculator helps you estimate the mortgage amount you can afford based on your income, debts, and down payment. Plan your home purchase with confidence!",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/2024-lexus-nx350-exterior-109-641b4ca787aca.jpg?crop=0.757xw:0.671xh;0.0537xw,0.249xh&resize=1200:*",
-      route: "/no-page"
-    },
-    {
-      id: 9,
       title: "Rent vs. Buy Calculator",
-      text: "Should you rent or buy a home? This calculator compares the costs of renting versus buying a property over time, considering rent, home prices, taxes, and other factors.",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/2024-lexus-nx350-exterior-109-641b4ca787aca.jpg?crop=0.757xw:0.671xh;0.0537xw,0.249xh&resize=1200:*",
+      text: "Compare the costs of renting versus buying a property over time. Consider rent, home prices, taxes, and other factors to make an informed decision.",
+      imageUrl: "https://www.realestaterph.com/wp-content/uploads/2020/06/Renting-Vs-Buying.png",
       route: "/no-page"
     },
     {
       id: 10,
-      title: "Student Loan Repayment Calculator",
-      text: "Navigate your student loan repayment with ease! Enter your loan amount, interest rate, and term to see your monthly payment and total interest paid. Plan your way to financial freedom.",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/2024-lexus-nx350-exterior-109-641b4ca787aca.jpg?crop=0.757xw:0.671xh;0.0537xw,0.249xh&resize=1200:*",
+      title: "Retirement Savings Planner",
+      text: "Plan for a comfortable retirement. Calculate how much you need to save based on your retirement goals and current financial situation.",
+      imageUrl: "https://www.investopedia.com/thmb/6Fs58qtVnu8FlWYTBtMA6lKp3r0=/2200x1500/filters:no_upscale():max_bytes(150000):strip_icc()/retirement_v1_0711-c8b08cb7dce649a085b940ff3926e794.png",
       route: "/no-page"
     },
     {
       id: 11,
-      title: "Retirement Savings Planner",
-      text: "Dreaming of a comfortable retirement? Find out how much you need to save based on your retirement goals, current age, and desired retirement age. Plan today for a secure tomorrow!",
-      imageUrl: "https://hips.hearstapps.com/hmg-prod/images/2024-lexus-nx350-exterior-109-641b4ca787aca.jpg?crop=0.757xw:0.671xh;0.0537xw,0.249xh&resize=1200:*",
-      route: "/no-page"
+      title: "Return on Investment Tool",
+      text: "Evaluate the effectiveness of your investments. Input initial amount, total returns, and duration to calculate your return on investment.",
+      imageUrl: "https://www.salesbook.com/wp-content/uploads/2023/04/what_is_ROI-1024x706.png",
+      route: "/roi-calculator"
     },
 
 
@@ -167,7 +175,7 @@ function CardCollection() {
 }
 
 function App() {
-  
+
   return (
     <Router>
       <div className="App">
@@ -184,9 +192,13 @@ function App() {
               <Routes>
                 <Route path="/" element={<CardCollection />} />
                 <Route path="/no-page" element={<NoPage />} />
-                <Route path="roi-calculator" element={<ROIPage />} />
-                <Route path="investment-calculator" element={<ROIPage />} />
-                <Route path="net-worth-calculator" element={<NetWorthPage />} />
+                <Route path="/roi-calculator" element={<ROIPage />} />
+                <Route path="/investment-calculator" element={<InvestmentPage />} />
+                <Route path="/net-worth-calculator" element={<NetWorthPage />} />
+                <Route path="/home-buying-calculator" element={<HomeBuyingPage />} />
+                <Route path="/take-home-pay-calculator" element={<TakeHomePayPage />} />
+                {/* more routes */}
+                
               </Routes>
             </Col>
           </Row>

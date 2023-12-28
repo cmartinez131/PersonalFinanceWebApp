@@ -1,0 +1,38 @@
+.formContainer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: auto;
+}
+
+.investmentCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #0a439a;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #0a439a;
+}
+
+
+.chartContainer {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}

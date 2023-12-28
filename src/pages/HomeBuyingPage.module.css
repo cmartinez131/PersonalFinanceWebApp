@@ -1,0 +1,67 @@
+.homeBuyingContainer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    color: #0a439a;
+    margin-bottom: 30px;
+}
+
+.form {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #0a439a;
+}
+
+.subtext {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.input {
+    border-radius: 4px;
+}
+
+.calculateButton {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.resultContainer {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+}
+
+.savingsInfo {
+    font-size: 1.1rem;
+    color: #555;
+    padding: 10px 0;
+}
+
+.informationHeading {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    color: #0a439a;
+}
