@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/button'
+import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import styles from '../pages/TakeHomePayPage.module.css'
