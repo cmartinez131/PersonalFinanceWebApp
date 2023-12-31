@@ -57,49 +57,14 @@ function InvestmentCard({
     );
 }
 
-// example popular investments data
-// const popularInvestments = [
-//     { name: "Marcus 4.4%", apy: 4.4, description: "High yield savings account" },
-//     { name: "VOO Stock", apy: 7, description: "S&P 500 ETF" },
-//     { name: "SPY Stock", apy: 8, description: "S&P 500 ETF" },
-//     // ...other popular investments...
-// ];
 
-// function PopularInvestment({ investment, onAdd }) {
-//     return (
-//         <Card style={{ width: '18rem', margin: '10px' }}>
-//             <Card.Body>
-//                 <Card.Title>{investment.name}</Card.Title>
-//                 <Card.Subtitle className="mb-2 text-muted">{investment.apy}% APY</Card.Subtitle>
-//                 <Card.Text>{investment.description}</Card.Text>
-//                 <Button variant="primary" onClick={() => onAdd(investment)}>Add</Button>
-//             </Card.Body>
-//         </Card>
-//     );
-// }
+
 
 function InvestmentPage() {
     const [initialAmount, setInitialAmount] = useState('')
     const [numberOfYears, setNumberOfYears] = useState('')
 
     const [investments, setInvestments] = useState({})
-
-    
-
-    // const handleAddPopularInvestment = (investment) => {
-    //     // Logic to add the popular investment to the list and update the chart
-    //     // You might need to adjust this based on how you're managing state
-    //     handleInvestmentSubmit({ // Assuming this is similar to your form submission
-    //         target: {
-    //             elements: {
-    //                 investmentName: { value: investment.name },
-    //                 apy: { value: investment.apy.toString() },
-    //             }
-    //         }
-    //     });
-    // };
-
-    
 
     // state used for name validation
     const [investmentNameError, setInvestmentNameError] = useState(false)
@@ -309,10 +274,24 @@ function InvestmentPage() {
                 <Button variant="link" onClick={handleShowInstructions} className={styles.instructionButton}>
                     Instructions<FaLightbulb />
                 </Button>
+                <div className={styles.chartContainer}>
+                    <Row>
+                        <Col>
+                            <Line
+                                data={chartData}
+                                options={{
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    aspectRatio: 2
+                                }}
+                            />
+                        </Col>
+                    </Row>
+                </div>
 
                 <Row>
-
-                    <Col md={6}>
+                    {/* form for initial amount and number of years */}
+                    <Col md={6} xs={12}>
                         <Form className={styles.formContainer}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Initial Amount</Form.Label>
@@ -330,7 +309,7 @@ function InvestmentPage() {
                                     type="number"
                                     value={additionalContribution}
                                     onChange={(e) => {
-
+                                
                                         const value = e.target.value;
                                         // check if the value is empty or NaN, and use 0 if it is NaN
                                         setAdditionalContribution(value === '' || isNaN(parseFloat(value)) ? '0' : parseFloat(value).toString());
@@ -361,7 +340,10 @@ function InvestmentPage() {
                                 />
                             </Form.Group>
                         </Form>
+                    </Col>
 
+                    {/* form for adding new investment methods */}
+                    <Col md={6} xs={12}>
                         <Form className={styles.formContainer} onSubmit={handleInvestmentSubmit}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Enter Investment Name or Method</Form.Label>
@@ -375,28 +357,9 @@ function InvestmentPage() {
                             <Button variant="primary" type="submit">Add Investment</Button>
                         </Form>
                     </Col>
-
-                    <Col md={6} className={styles.chartContainer}>
-                        <Line data={chartData} options={{
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            // maintainAspectRatio: false, and also delete aspect ration line
-                            aspectRatio: 2
-                        }} />
-                        {/* <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
-                            {popularInvestments.map((investment, index) => (
-                                <PopularInvestment 
-                                    key={index} 
-                                    investment={investment} 
-                                    onAdd={handleAddPopularInvestment} 
-                                />
-                            ))}
-                        </div> */}
-                    </Col>
-                    
                 </Row>
 
-                
+                <br />
 
                 <Row xs={1} md={2} lg={3}>
                     {Object.entries(investments).map(([id, investment]) => (

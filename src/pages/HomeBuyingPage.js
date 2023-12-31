@@ -11,6 +11,7 @@ function HomeBuyingPage() {
     const [savingsRate, setSavingsRate] = useState('');
     const [interestRate, setInterestRate] = useState('');
     const [result, setResult] = useState({ years: 0, months: 0, monthlyMortgage: 0, downPayment: 0 });
+    const [initialSavings, setInitialSavings] = useState('');
 
     const [showInstructions, setShowInstructions] = useState(false);
     const handleShowInstructions = () => setShowInstructions(true);
@@ -55,30 +56,23 @@ function HomeBuyingPage() {
     };
 
     useEffect(() => {
-        const downPayment = homePrice * 0.2; // 20% down payment
-        const principal = homePrice - downPayment;
-        const monthlySavings = income * (savingsRate / 100);
-        const totalMonths = downPayment / monthlySavings;
-        const years = Math.floor(totalMonths / 12);
-        const months = Math.round(totalMonths % 12);
-        const monthlyMortgage = calculateMortgagePayment(principal, interestRate, 30); // Assuming a 30-year loan term
+        // Calculate the down payment required and subtract initial savings
+        const downPaymentRequired = calculateDownPayment();
+        const totalNeeded = Math.max(downPaymentRequired - initialSavings, 0); // Ensure it doesn't go negative
 
-        setResult({ years, months, monthlyMortgage, downPayment });
-    }, [homePrice, income, savingsRate, interestRate]);
-
-    // Calculate the time to save for the downpayment and mortgage payment
-    const calculateTime = (e) => {
-        e.preventDefault();
-        const downPayment = calculateDownPayment();
-        const principal = homePrice - downPayment;
+        // Calculate monthly savings and time needed
         const monthlySavings = calculateMonthlySavings();
-        const totalMonths = downPayment / monthlySavings;
+        const totalMonths = monthlySavings > 0 ? totalNeeded / monthlySavings : 0;
         const years = Math.floor(totalMonths / 12);
         const months = Math.round(totalMonths % 12);
-        const monthlyMortgage = calculateMortgagePayment(principal, interestRate, 30); // Assuming a 30-year loan term
 
-        setResult({ years, months, monthlyMortgage, downPayment });
-    };
+        // Calculate mortgage payment
+        const monthlyMortgage = calculateMortgagePayment(homePrice - downPaymentRequired, interestRate, 30);
+
+        // Update result state
+        setResult({ years, months, monthlyMortgage, downPayment: downPaymentRequired });
+    }, [homePrice, income, savingsRate, interestRate, initialSavings]);
+
 
     // Calculate the mortgage payment
     const calculateMortgagePayment = (principal, annualInterestRate, loanTermYears) => {
@@ -109,13 +103,16 @@ function HomeBuyingPage() {
             <Button variant="link" onClick={handleShowInstructions} className={styles.instructionButton}>
                 Instructions<FaLightbulb />
             </Button>
-            <Form onSubmit={calculateTime} className={styles.form}>
+            <Form className={styles.form}>
                 <Card className={styles.inputCard}>
                     <Card.Body>
                         <Row>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className={styles.label}>Price of the Home</Form.Label>
+                                    <small className={styles.subtext}>
+                                        Enter the total price of the home you wish to buy.
+                                    </small>
                                     <Form.Control
                                         type="number"
                                         value={homePrice}
@@ -123,14 +120,34 @@ function HomeBuyingPage() {
                                         placeholder="Enter home price"
                                         className={styles.input}
                                     />
-                                    <small className={styles.subtext}>
-                                        Enter the total price of the home you wish to buy.
-                                    </small>
+
                                 </Form.Group>
                             </Col>
+
+                            {/* savings Rate Input Field */}
+                            <Col md={6}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label className={styles.label}>Initial Savings</Form.Label>
+                                    <small className={styles.subtext}>
+                                        Enter the amount you already have saved for your home.
+                                    </small>
+                                    <Form.Control
+                                        type="number"
+                                        value={initialSavings}
+                                        onChange={(e) => setInitialSavings(e.target.value)}
+                                        placeholder="Enter initial savings"
+                                        className={styles.input}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className={styles.label}>Post-Tax Income (Monthly)</Form.Label>
+                                    <small className={styles.subtext}>
+                                        Enter your total income after taxes per month.
+                                    </small>
                                     <Form.Control
                                         type="number"
                                         value={income}
@@ -138,31 +155,57 @@ function HomeBuyingPage() {
                                         placeholder="Enter monthly income"
                                         className={styles.input}
                                     />
-                                    <small className={styles.subtext}>
-                                        Enter your total income after taxes per month.
-                                    </small>
                                 </Form.Group>
                             </Col>
-                        </Row>
-                        <Row>
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className={styles.label}>Savings Rate (%)</Form.Label>
+                                    <small className={styles.subtext}>
+                                        What percentage of your post-tax income will you save each month?
+                                    </small>
                                     <Form.Control
                                         type="number"
                                         value={savingsRate}
-                                        onChange={(e) => setSavingsRate(e.target.value)}
+                                        onChange={(e) => {
+                                            let newRate = e.target.value;
+                                            if (newRate === '') {
+                                                setSavingsRate('');
+                                            } else {
+                                                newRate = parseFloat(newRate);
+                                                if (!isNaN(newRate) && newRate >= 0 && newRate <= 100) {
+                                                    setSavingsRate(newRate.toString());
+                                                }
+                                            }
+                                        }}
                                         placeholder="Enter savings rate"
                                         className={styles.input}
+                                        max="100"
                                     />
-                                    <small className={styles.subtext}>
-                                        What percentage of your monthly post-tax income do you plan to put aside?
-                                    </small>
+
+                                    {/* monthly savings display */}
+                                    <div className={styles.monthlySavingsInfo}>
+                                        <p className={styles.savingsInfoText}>
+                                            <strong>Money saved every month: </strong>
+                                            {calculateMonthlySavings().toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                        </p>
+                                        {/* <small className="text-muted d-block">
+                                            Based on a savings rate of {savingsRate}% of your monthly income.
+                                        </small> */}
+                                    </div>
                                 </Form.Group>
                             </Col>
+
+
+                        </Row>
+                        <Row>
+
+
                             <Col md={6}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className={styles.label}>Mortgage Interest Rate (%)</Form.Label>
+                                    <small className={styles.subtext}>
+                                        Enter the annual interest rate for a 30-year fixed mortgage. The average rate for 30-year fixed mortgage in 2023 is 7%.
+                                    </small>
                                     <Form.Control
                                         type="number"
                                         value={interestRate}
@@ -170,44 +213,44 @@ function HomeBuyingPage() {
                                         placeholder="Enter interest rate"
                                         className={styles.input}
                                     />
-                                    <small className={styles.subtext}>
-                                    Enter the annual interest rate for a 30-year fixed mortgage. The average rate for 30-year fixed mortgage in 2023 is 7%.
-                                    </small>
+
                                 </Form.Group>
                             </Col>
                         </Row>
                     </Card.Body>
                 </Card>
 
-                <Button variant="primary" type="submit" className={styles.calculateButton}>Caulcate</Button>
+
             </Form>
 
-            {result.years > 0 || result.months > 0 ? (
-                <div className={styles.resultContainer}>
-                    <h3>Down Payment and Savings Details:</h3>
-                    <div className={styles.downPaymentSection}>
-                        <p><strong>Home Price:</strong> {parseFloat(homePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                        <p><strong>Down Payment Required (20%):</strong> {result.downPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                        <p><strong>Monthly Savings for Down Payment:</strong> {calculateMonthlySavings().toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                            <small className="text-muted d-block">
-                                Based on a savings rate of {savingsRate}% of your monthly income.
-                            </small>
-                        </p>
-                        <p><strong>Time to Save for Down Payment:</strong> {result.years} Years and {result.months} Months</p>
+            {
+                (result.years >= 0 && result.months >= 0) ? (
+                    <div className={styles.resultContainer}>
+                        <h3>Down Payment and Savings Details:</h3>
+                        <div className={styles.downPaymentSection}>
+                            <p><strong>Home Price:</strong> {parseFloat(homePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                            <p><strong>Down Payment Required (20%):</strong> {result.downPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+
+                            <p><strong>Time to Save for Down Payment:</strong> {result.years} Years and {result.months} Months</p>
+                        </div>
+                        <div className={styles.mortgageSection}>
+                            <p><strong>Estimated Monthly Mortgage Payment:</strong> {result.monthlyMortgage.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                <small className="text-muted d-block">
+                                    Based on a 30-year fixed mortgage.
+                                </small>
+                            </p>
+                        </div>
                     </div>
-                    <div className={styles.mortgageSection}>
-                        <p><strong>Estimated Monthly Mortgage Payment:</strong> {result.monthlyMortgage.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                            <small className="text-muted d-block">
-                                Based on a 30-year fixed mortgage.
-                            </small>
-                        </p>
+                ) : (
+                    <div className={styles.resultContainer}>
+                        <p>Please ensure all fields are correctly filled and that the savings rate is sufficient to save for a down payment.</p>
                     </div>
-                </div>
-            ) : null}
+                )
+            }
             <br />
             <br />
             <br />
-            
+
             <Row className="mt-4">
                 <Col>
                     {generateHomeBuyingInfoCards()}
