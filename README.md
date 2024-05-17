@@ -1,70 +1,33 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Financial Calculator Web Application
 
-## Available Scripts
+This repository hosts code for a Financial Calculator Web Application, designed to help users perform various financial calculations through an intuitive user interface. This web application provides solutions for users to calculate investments, home buying affordability, take-home pay, net worth, and more, with engaging and responsive design elements.
 
-In the project directory, you can run:
+## Key Features
 
-### `npm start`
+- **Various Financial Calculators**: Users can access different calculators for investment, home buying, net worth, ROI, take-home pay, and more.
+- **Dynamic User Interfaces**: Engaging and responsive design allows users to navigate through different calculators with ease.
+- **Data Visualization**: Graphs and charts to visualize financial growth and comparisons.
+- **Mobile Friendly**: Fully responsive design that works across all devices and screen sizes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React**: For building a dynamic and speedy interface.
+- **HTML/CSS**: Used to craft custom layouts and design elements, providing a visually appealing and smooth user experience.
+- **Bootstrap**: For responsive design and pre-styled components.
+- **React-Bootstrap**: Integration of Bootstrap with React for easier component management.
+- **Firebase**: For deaployment.
+- **React Router**: Provides seamless in-app navigation without page reloads.
+- **Chart.js**: For creating interactive and responsive charts.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Available Calculators
 
-### `npm run build`
+- **Net Worth Calculator**: Calculate your financial standing by evaluating all your assets against liabilities.
+- **Investment Calculator**: Explore your investment potential and see how your money could grow over time.
+- **Home Buying Calculator**: Determine how long it will take to buy your dream home based on your income.
+- **Take-Home Pay Calculator**: Discover your actual take-home pay after taxes.
+- **ROI Calculator**: Evaluate the effectiveness of your investments by calculating your return on investment.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Note: More to come
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
