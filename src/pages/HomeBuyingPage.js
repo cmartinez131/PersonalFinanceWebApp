@@ -224,29 +224,29 @@ function HomeBuyingPage() {
             </Form>
 
             {
-    (result.years >= 0 && result.months >= 0) ? (
-        <div className={styles.resultContainer}>
-            <h3>Down Payment and Savings Details:</h3>
-            <div className={styles.downPaymentSection}>
-                <p><strong>Home Price:</strong> {isNaN(parseFloat(homePrice)) ? '$0.00' : parseFloat(homePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                <p><strong>Down Payment Required (20%):</strong> {result.downPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                (result.years >= 0 && result.months >= 0) ? (
+                    <div className={styles.resultContainer}>
+                        <h3>Down Payment and Savings Details:</h3>
+                        <div className={styles.downPaymentSection}>
+                            <p><strong>Home Price:</strong> {isNaN(parseFloat(homePrice)) ? '$0.00' : parseFloat(homePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                            <p><strong>Down Payment Required (20%):</strong> {result.downPayment.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
 
-                <p><strong>Time to Save for Down Payment:</strong> {result.years} Years and {result.months} Months</p>
-            </div>
-            <div className={styles.mortgageSection}>
-                <p><strong>Estimated Monthly Mortgage Payment:</strong> {result.monthlyMortgage.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                    <small className="text-muted d-block">
-                        Based on a 30-year fixed mortgage.
-                    </small>
-                </p>
-            </div>
-        </div>
-    ) : (
-        <div className={styles.resultContainer}>
-            <p>Please ensure all fields are correctly filled and that the savings rate is sufficient to save for a down payment.</p>
-        </div>
-    )
-}
+                            <p><strong>Time to Save for Down Payment:</strong> {result.years} Years and {result.months} Months</p>
+                        </div>
+                        <div className={styles.mortgageSection}>
+                            <p><strong>Estimated Monthly Mortgage Payment:</strong> {result.monthlyMortgage.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                <small className="text-muted d-block">
+                                    Based on a 30-year fixed mortgage.
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className={styles.resultContainer}>
+                        <p>Please ensure all fields are correctly filled and that the savings rate is sufficient to save for a down payment.</p>
+                    </div>
+                )
+            }
             <br />
             <br />
             <br />
