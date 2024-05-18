@@ -1,20 +1,19 @@
-import Button from 'react-bootstrap/Button'
-import { Container, Row, Col, Card } from 'react-bootstrap'
-import { Nav, NavItem } from 'react-bootstrap'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-// LinkContainer allows boostrap components such as 'Button' and 'Navbar' to behave like react router
-import { LinkContainer } from 'react-router-bootstrap'
-import NoPage from './pages/NoPage'
-import { Link } from 'react-router-dom'
-
-
-import MyNavbar from './components/MyNavbar'
-import ROIPage from './pages/ROIPage'
-import NetWorthPage from './pages/NetWorthPage'
-import InvestmentPage from './pages/InvestmentPage'
-import HomeBuyingPage from './pages/HomeBuyingPage'
-import TakeHomePayPage from './pages/TakeHomePayPage'
-
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Card, Button, Modal, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import MyNavbar from './components/MyNavbar';
+import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import ROIPage from './pages/ROIPage';
+import NetWorthPage from './pages/NetWorthPage';
+import InvestmentPage from './pages/InvestmentPage';
+import HomeBuyingPage from './pages/HomeBuyingPage';
+import TakeHomePayPage from './pages/TakeHomePayPage';
+import NoPage from './pages/NoPage';
+import TrackJourneyPage from './pages/TrackJourneyPage';
+import './styles.css';
 
 function Sidebar() {
   return (
@@ -22,52 +21,63 @@ function Sidebar() {
       <h2>Go to: </h2>
       <Nav className='flex-column'>
         <NavItem>
-          <Link to="/" className="nav-link">All Calculators</Link>
+          <LinkContainer to="/">
+            <Nav.Link>All Calculators</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/net-worth-calculator" className="nav-link">Net Worth Calculator</Link>
+          <LinkContainer to="/net-worth-calculator">
+            <Nav.Link>Net Worth Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/investment-calculator" className="nav-link">Investment Calculator</Link>
+          <LinkContainer to="/investment-calculator">
+            <Nav.Link>Investment Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/home-buying-calculator" className="nav-link">Home Buying Calculator</Link>
+          <LinkContainer to="/home-buying-calculator">
+            <Nav.Link>Home Buying Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/take-home-pay-calculator" className="nav-link">Take Home Pay Calculator</Link>
+          <LinkContainer to="/take-home-pay-calculator">
+            <Nav.Link>Take Home Pay Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/roi-calculator" className="nav-link">Return on Investment Calculator</Link>
+          <LinkContainer to="/roi-calculator">
+            <Nav.Link>Return on Investment Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/car-cost-calculator" className="nav-link">Compare Car Lease vs Finance Calculator</Link>
+          <LinkContainer to="/car-cost-calculator">
+            <Nav.Link>Compare Car Lease vs Finance Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
         <NavItem>
-          <Link to="/affordability-calculator" className="nav-link">Affordability Calculator</Link>
+          <LinkContainer to="/affordability-calculator">
+            <Nav.Link>Affordability Calculator</Nav.Link>
+          </LinkContainer>
         </NavItem>
-        {/* repeat for other links */}
       </Nav>
     </div>
-  )
+  );
 }
-
 
 function CalcCard({ title, text, imageUrl, route }) {
   return (
     <Card className='calc-card text-center'>
-      <Link to={route} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <Card.Img variant="top" src={imageUrl} />
-
-        <Card.Body>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>
-            {text}
-          </Card.Text>
-          <LinkContainer to={route}>
+      <LinkContainer to={route}>
+        <Nav.Link>
+          <Card.Img variant="top" src={imageUrl} />
+          <Card.Body>
+            <Card.Title>{title}</Card.Title>
+            <Card.Text>{text}</Card.Text>
             <Button variant="primary">Try it</Button>
-          </LinkContainer>
-        </Card.Body>
-      </Link>
+          </Card.Body>
+        </Nav.Link>
+      </LinkContainer>
     </Card>
   );
 }
@@ -102,7 +112,6 @@ function CardCollection() {
       imageUrl: "https://cdn.vox-cdn.com/thumbor/BdZesQyvmI96OWiRPSK0jK5ipu0=/0x0:7095x5000/1200x800/filters:focal(2889x1608:4023x2742)/cdn.vox-cdn.com/uploads/chorus_image/image/72727061/GettyImages_1482844574.0.jpg",
       route: "/no-page"
     },
-    
     {
       id: 5,
       title: "Calculate my salary after taxes",
@@ -152,13 +161,11 @@ function CardCollection() {
       imageUrl: "https://www.salesbook.com/wp-content/uploads/2023/04/what_is_ROI-1024x706.png",
       route: "/roi-calculator"
     },
+  ];
 
-
-  ]
   return (
     <Container fluid className='card-collection-container'>
       <Row>
-        {/* make a card for each entry in the array */}
         {cardData.map(card => (
           <Col key={card.id} md={4} className="mb-4">
             <CalcCard
@@ -171,39 +178,50 @@ function CardCollection() {
         ))}
       </Row>
     </Container>
-  )
+  );
 }
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
 
   return (
     <Router>
       <div className="App">
         <MyNavbar />
         <Container fluid className='mt-4'>
-          {/* <Container fluid> */}
           <Row>
             <Col xs={2}>
               <Sidebar />
             </Col>
             <Col md={{ span: 10 }}>
-
-              {/* load diffrent page based on the route */}
               <Routes>
                 <Route path="/" element={<CardCollection />} />
-                <Route path="/no-page" element={<NoPage />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/roi-calculator" element={<ROIPage />} />
                 <Route path="/investment-calculator" element={<InvestmentPage />} />
                 <Route path="/net-worth-calculator" element={<NetWorthPage />} />
                 <Route path="/home-buying-calculator" element={<HomeBuyingPage />} />
                 <Route path="/take-home-pay-calculator" element={<TakeHomePayPage />} />
-                {/* more routes */}
-                
+                <Route path="/track-journey" element={<TrackJourneyPage />} />
+                <Route path="*" element={<NoPage />} />
               </Routes>
             </Col>
           </Row>
         </Container>
-
+        <Modal show={showModal} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login Successful</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Welcome! You have successfully logged in.</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </Router>
   );

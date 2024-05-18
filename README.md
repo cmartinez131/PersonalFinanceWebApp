@@ -1,33 +1,44 @@
 
 # Financial Calculator Web Application
 
-This repository hosts code for a Financial Calculator Web Application, designed to help users perform various financial calculations through an intuitive user interface. This web application provides solutions for users to calculate investments, home buying affordability, take-home pay, net worth, and more, with engaging and responsive design elements.
+This repository hosts code for a Financial Calculator Web Application, designed to help users perform various financial calculations through an intuitive user interface. This web application provides solutions for users to calculate investments, home buying affordability, take-home pay, net worth, and more, with engaging and responsive design elements. The aim is to provide users with a comprehensive tool for managing their personal finances effectively.
 
 ## Key Features
 
-- **Various Financial Calculators**: Users can access different calculators for investment, home buying, net worth, ROI, take-home pay, and more.
-- **Dynamic User Interfaces**: Engaging and responsive design allows users to navigate through different calculators with ease.
+- **User Authentication and Profiles**: Secure user registration and login. Profile management with personal details and financial goals.
+- **Financial Snapshots**: Snapshots of current net worth, income, and expenses. Timeline view to track financial progress over time.
+- **Comprehensive Financial Statements**: Generate balance sheets showing assets, liabilities, and net worth. Income statements detailing income, expenses, and net profit/loss. Statements of owner's equity tracking changes over time.
+- **Various Financial Calculators**: Net Worth Calculator, Investment Calculator, Home Buying Calculator, Take-Home Pay Calculator, ROI Calculator.
+- **Dynamic User Interfaces**: Engaging and responsive design. Easy navigation through different calculators.
 - **Data Visualization**: Graphs and charts to visualize financial growth and comparisons.
-- **Mobile Friendly**: Fully responsive design that works across all devices and screen sizes.
+- **Goal Tracking**: Set financial goals and track progress. Notifications and reminders based on goal progress.
+- **Notifications and Alerts**: Notifications for important events like bill due dates and goal progress. Customizable notification preferences, including end-of-month reminders to update financial information.
+- **Customizable Dashboards**: Customizable dashboard with widgets and shortcuts. Drag-and-drop functionality for rearranging elements.
+- **Notifications and Alerts**: Notifications for important events like bill due dates and goal progress. Customizable notification preferences.
+- **Mobile-Friendly Design**: Fully responsive design for seamless use on mobile devices.
+- **Accessibility Features**: Meet accessibility standards (WCAG). Screen reader support and keyboard navigation.
 
 ## Technologies Used
 
-- **React**: For building a dynamic and speedy interface.
-- **HTML/CSS**: Used to craft custom layouts and design elements, providing a visually appealing and smooth user experience.
-- **Bootstrap**: For responsive design and pre-styled components.
-- **React-Bootstrap**: Integration of Bootstrap with React for easier component management.
-- **Firebase**: For deaployment.
-- **React Router**: Provides seamless in-app navigation without page reloads.
-- **Chart.js**: For creating interactive and responsive charts.
+- **Frontend**:
+  - **React**: For building a dynamic and responsive user interface.
+  - **HTML/CSS**: Custom layouts and design elements.
+  - **Bootstrap/React-Bootstrap**: Responsive design and pre-styled components.
+  - **Chart.js**: Interactive and responsive charts for data visualization.
+  - **Socket.io**: Real-time communication and collaboration.
 
+- **Backend**:
+  - **Node.js**: Server-side runtime environment.
+  - **Express.js**: Web framework for building the backend.
+  - **Socket.io**: For sending real-time notifications and reminders.
+  - **AWS Lambda**: Serverless functions for backend logic.
+  - **AWS API Gateway**: For creating and managing APIs.
 
-## Available Calculators
+- **Database**:
+  - **MongoDB**: NoSQL database for storing user data and financial information.
+  - **MongoDB Atlas**: Managed cloud-based MongoDB service.
 
-- **Net Worth Calculator**: Calculate your financial standing by evaluating all your assets against liabilities.
-- **Investment Calculator**: Explore your investment potential and see how your money could grow over time.
-- **Home Buying Calculator**: Determine how long it will take to buy your dream home based on your income.
-- **Take-Home Pay Calculator**: Discover your actual take-home pay after taxes.
-- **ROI Calculator**: Evaluate the effectiveness of your investments by calculating your return on investment.
-
-### Note: More to come
-
+- **Authentication and Deployment**:
+  - **AWS Cognito**: User authentication and management.
+  - **AWS Amplify/S3 + CloudFront**: For deploying the frontend.
+  - **AWS DynamoDB**: (Optional) For additional data storage.

@@ -1,12 +1,11 @@
 /* Custom global styles that can override bootstrap styles */
 
-
 body {
     background-color: #98A9BF;
 }
 
 .App {
-   
+    background-color: #98A9BF;
 }
 
 .gray-box {
@@ -22,7 +21,6 @@ body {
     padding: 20px;
     box-sizing: border-box;
     height: auto;
-    box-sizing: border-box;
     font-size: 1.2rem;
     margin-left: -15px;
     margin-right: -15px;
@@ -40,10 +38,6 @@ body {
 .sidebar .nav-link:hover, .sidebar .nav-link:focus {
     background-color: #2A2F30;
     text-decoration: none;
-}
-
-.nav {
-
 }
 
 .navbar-brand img {
@@ -65,7 +59,7 @@ body {
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
-  
+
 .calc-card:hover {
     transform: scale(1.05);
 }
@@ -79,9 +73,9 @@ body {
 }
 
 .calc-card img {
-    height: 200px; /* fixed height for imaged*/
+    height: 200px; /* fixed height for images */
     object-fit: cover; /* cover the entire area without stretching */
- }
+}
 
 .card-collection-container {
     /* margin-top: 30px;  */
